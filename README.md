@@ -7,7 +7,7 @@ oclif-ux-test
 git clone https://github.com/mdonnalley/oclif-ux-test.git
 cd oclif-ux-test
 yarn && yarn build
-bin/dev ux --all
+bin/dev ux --help
 ```
 
 ```
