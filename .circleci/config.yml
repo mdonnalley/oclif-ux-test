@@ -13,11 +13,9 @@ jobs:
       - checkout
       # - run: choco install nodejs --yes
       - run: node --version
+      - run: git clone https://github.com/oclif/core.git ~/core --branch mdonnalley/char-aliases
       - run: |
-          cd ..
-          git clone https://github.com/oclif/core.git --branch mdonnalley/char-aliases
-      - run: |
-          cd core
+          cd ~/core
           yarn
           yarn build
       - run: yarn test:e2e
