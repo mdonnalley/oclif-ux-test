@@ -11,7 +11,8 @@ jobs:
     executor: win/default
     steps:
       - checkout
-      - run: choco install nodejs --yes
+      # - run: choco install nodejs --yes
+      - run: node --version
       - run: |
           cd ..
           git clone https://github.com/oclif/core.git --branch mdonnalley/char-aliases
