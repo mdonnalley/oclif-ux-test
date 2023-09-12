@@ -14,6 +14,10 @@ jobs:
       # - run: choco install nodejs --yes
       - run: node --version
       - run: git clone https://github.com/oclif/core.git ~/core --branch mdonnalley/char-aliases
+      - run: Write-Host $LASTEXITCODE
+      - run: |
+          ls ~
+          ls ~/core
       - run: |
           cd ~/core
           yarn
