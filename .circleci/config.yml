@@ -13,6 +13,15 @@ jobs:
     resource_class: windows.medium
     steps:
       - checkout
+      - run: choco install nodejs
+      - run: |
+          cd ..
+          git clone https://github.com/oclif/core.git --branch mdonnalley/char-aliases
+      - run: |
+          cd core
+          yarn
+          yarn build
+      - run: yarn test:e2e
 
 
 # Invoke jobs via workflows
@@ -22,10 +31,3 @@ workflows:
     # Inside the workflow, you define the jobs you want to run.
     jobs:
       - test-windows
-      - node/test:
-          # This is the node version to use for the `cimg/node` tag
-          # Relevant tags can be found on the CircleCI Developer Hub
-          # https://circleci.com/developer/images/image/cimg/node
-          version: '16.10'
-          # If you are using yarn, change the line below from "npm" to "yarn"
-          pkg-manager: npm
