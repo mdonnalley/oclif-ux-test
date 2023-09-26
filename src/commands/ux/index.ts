@@ -71,7 +71,7 @@ export default class Ux extends Command {
 
   private async spinner(style: SpinnerStyle): Promise<void> {
     this.logTestName('Testing spinner')
-    ux.action.start('starting spinner', 'spinning', {style})
+    ux.action.start('starting spinner', undefined, {style})
     await ux.wait(2500)
     ux.action.status = 'still going'
     await ux.wait(2500)
