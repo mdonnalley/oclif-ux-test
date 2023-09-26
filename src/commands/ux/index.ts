@@ -1,4 +1,5 @@
 import {Command, Flags, ux} from '@oclif/core'
+import spinners from '@oclif/core/lib/cli-ux/action/spinners'
 // eslint-disable-next-line unicorn/import-style
 import * as chalk from 'chalk'
 
@@ -23,6 +24,8 @@ const THINGS = [
   },
 ]
 
+type SpinnerStyle = keyof typeof spinners
+
 export default class Ux extends Command {
   static summary = 'Test oclif ux methods'
 
@@ -39,13 +42,17 @@ export default class Ux extends Command {
     styledHeader: Flags.boolean(),
     styledObject: Flags.boolean(),
     styledJSON: Flags.boolean(),
+    'spinner-style': Flags.custom<SpinnerStyle>()({
+      default: 'dots2',
+      options: Object.keys(spinners),
+    }),
   }
 
   // eslint-disable-next-line complexity
   async run(): Promise<void> {
     const {flags} = await this.parse(Ux)
 
-    if (flags.all || flags.spinner) await this.spinner()
+    if (flags.all || flags.spinner) await this.spinner(flags['spinner-style'])
     if (flags.all || flags.info) this.info()
     if (flags.all || flags.warn) this.doWarn()
     if (flags.all || flags.table) this.table()
@@ -62,9 +69,9 @@ export default class Ux extends Command {
     this.log(`\n# ${chalk.bold.cyan(name)}\n`)
   }
 
-  private async spinner(): Promise<void> {
+  private async spinner(style: SpinnerStyle): Promise<void> {
     this.logTestName('Testing spinner')
-    ux.action.start('starting spinner', undefined, {style: 'arc'})
+    ux.action.start('starting spinner', 'spinning', {style})
     await ux.wait(2500)
     ux.action.status = 'still going'
     await ux.wait(2500)

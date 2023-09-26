@@ -1,0 +1,19 @@
+version: 2.1
+
+orbs:
+  win: circleci/windows@5.0
+
+jobs:
+  windows:
+    executor: win/default
+    steps:
+      - checkout
+      - run: node --version
+      - run: npm install -g yarn
+      - run: yarn
+      - run: yarn build
+
+workflows:
+  windows:
+    jobs:
+      - windows
