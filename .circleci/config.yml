@@ -8,6 +8,15 @@ jobs:
     executor: win/default
     steps:
       - checkout
+      - run:
+          name: Install NVM
+          command: choco install nvm
+      - run:
+          shell: bash.exe
+          command: |
+            nvm list
+            nvm install 18.18.2
+            nvm use 18.18.2
       - run: node --version
       - run: npm install -g yarn
       - run: yarn
