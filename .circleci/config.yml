@@ -10,7 +10,7 @@ jobs:
       - checkout
       - run:
           name: Install NVM
-          command: choco install nvm
+          command: choco install nvm -y
       - run:
           shell: bash.exe
           command: |
